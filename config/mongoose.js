@@ -1,22 +1,16 @@
 const mongoose = require('mongoose');
-const debuglog = require('debug')('development:mongooseconfig');
+// const debuglog = require('debug')('development:mongooseconfig');
 const dotenv = require('dotenv');
 
 dotenv.config();
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Connected to MongoDB!'))
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 const db = mongoose.connection;
-
-db.on("error", function (err) {
-    console.error('MongoDB connection error:', err); 
-});
-
-db.on("open", function(){
-    console.log('Connected to MongoDB!');  // Successful connection to MongoDB server
-    
-})
 
 module.exports = db;
