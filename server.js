@@ -18,7 +18,7 @@ app.use("/api/resume", resumeRoutes);
 app.use("/api/resume", resumeSearchRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello, World!");
+  res.send("Welcome to Resume Analysis App");
 });
 
 const PORT = process.env.PORT || 5000;
